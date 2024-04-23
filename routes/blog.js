@@ -37,20 +37,20 @@ INNER JOIN authors ON posts.author_id=authors.id WHERE posts.id=?
     //req.params.id will contain a dyanmic value which is present at the end of the url
     const [posts] = await db.query(query, [req.params.id]);//dyanmic ko aise alag se array bnake likh dia kro as a second parameter
 
-    if (!posts || posts.length === 0) {//in case posts array is empty
-        return res.status(404).render('404')
-    }
-    const postData = {
-        ...posts[0], //this is spread operator with help of this all key value pairs are seperated. 
-        date: posts[0].date.toISOString(),
-        humanReadableDate: posts[0].date.toLocaleDateString('en-US', {
-            weekday: 'long',
-            year: 'numeric',
-            month: 'long',
-            day: 'numeric'
-        }) //converts date into human readable string
+    // if (!posts || posts.length === 0) {//in case posts array is empty
+    //     return res.status(404).render('404')
+    // }
+    // const postData = {
+    //     ...posts[0], //this is spread operator with help of this all key value pairs are seperated. 
+    //     date: posts[0].date.toISOString(),
+    //     humanReadableDate: posts[0].date.toLocaleDateString('en-US', {
+    //         weekday: 'long',
+    //         year: 'numeric',
+    month: 'long',
+        day: 'numeric'
+}) //converts date into human readable string
     };
-    res.render('post-detail', { post: postData });
+res.render('post-detail', { post: postData });
 });
 
 router.get('/posts/:id/edit', async function (req, res) {//this route will be triggered with you click on edit post
